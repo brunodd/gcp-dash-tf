@@ -19,9 +19,9 @@ def get_earnings(ticker: yfinance.Ticker) -> pd.DataFrame:
 
 
 def get_balance(ticker: yfinance.Ticker) -> pd.DataFrame:
-    BALANCE_FIELDS = ['Short Long Term Debt', 'Long Term Debt', 'Total Assets']
+    BALANCE_FIELDS = ['Total Liab', 'Total Assets']
     df = ticker.get_balancesheet(freq='yearly').T[BALANCE_FIELDS]
-    df['debt'] = df['Short Long Term Debt'] + df['Long Term Debt']
+    df['debt'] = df['Total Liab']
     df['assets'] = df['Total Assets']
     df.index = pd.to_datetime(df.index)
     return df[['debt', 'assets']]
